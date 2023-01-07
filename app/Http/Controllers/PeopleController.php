@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PeopleRequest;
 use App\Models\People;
+use App\Models\Tickets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,11 +24,11 @@ class PeopleController extends Controller
                         ->Where("ticket_id", $req->get("ticket_id"))
                         ->count();
         if (
-            intval($currentUsage) == intval($maxUsage) ||
-            intval($currentUsage) > intval($maxUsage)
+            intval($currentUsage) == intval($maxUsage->max_usages) ||
+            intval($currentUsage) > intval($maxUsage->max_usages)
         ) {
             return response("A jegy elérte a maximum felhasználhatóságot",
-                            401);
+                            400);
         }
 
         $people = new People();
@@ -54,14 +55,13 @@ class PeopleController extends Controller
                         ->Where("ticket_id", $req->get("ticket_id"))
                         ->count();
         if (
-            intval($currentUsage) == intval($maxUsage) ||
-            intval($currentUsage) > intval($maxUsage)
+                    intval($currentUsage) == intval($maxUsage->max_usages) ||
+                    intval($currentUsage) > intval($maxUsage->max_usages)
         ) {
             return response("A jegy elérte a maximum felhasználhatóságot",
                             400);
         }
 
-        $people = new People();
         if ($req->has("name")) {
             $people->name = $req->get("name");
         }

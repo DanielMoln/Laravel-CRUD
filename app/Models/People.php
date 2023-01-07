@@ -10,7 +10,7 @@ class People extends Model
     use HasFactory;
     public $timestamps = false;
     public function ticket() {
-        return $this->belongsTo(Ticket::class, 
+        return $this->belongsTo(Tickets::class, 
             'ticket_id', 'id');
     }
 }

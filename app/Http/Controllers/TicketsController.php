@@ -35,8 +35,6 @@ class TicketsController extends Controller
             return response("A jegy elérte a maximum felhasználhatóságot",
                             400);
         }
-
-        $ticket = new Tickets();
         $ticket->prefix = $req->get("prefix");
         $ticket->price = $req->get("price");
         $ticket->release_date = $req->get("release_date");

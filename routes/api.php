@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => '/people'], function () {
     Route::get("/", [PeopleController::class, "index"])->name("getPeople");
     Route::post("/create", [PeopleController::class, "create"])->name("createPeople");
-    Route::put("/{ticket}", [PeopleController::class, "update"])->name("updatePeople");
-    Route::delete("/{ticket}", [PeopleController::class, "delete"])->name("deletePeople");
+    Route::put("/{people}", [PeopleController::class, "update"])->name("updatePeople");
+    Route::delete("/{people}", [PeopleController::class, "delete"])->name("deletePeople");
 });
 Route::group(['prefix' => '/tickets'], function () {
     Route::get("/", [TicketsController::class, "index"])->name("getTickets");
